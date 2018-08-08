@@ -18,3 +18,12 @@ variable "machine_type" {
 variable "initial_node_count" {
     description = "Number of nodes to start the cluster with"
 }
+
+variable "cluster_admin_user" {
+    description = "create a system-admin clusterrolebinding for this user and the cluster."
+}
+
+variable "enable_helm" {
+    description = "Set up and provision helm in the cluster."
+    default = false
+}

@@ -11,9 +11,16 @@ resource "google_container_cluster" "cluster" {
         }
     }
 
-    # Let's set up the local kubectrl credentials for this once it's up"'
+    # Let's set up the local kubectrl credentials for this once it's up.
     # Note: this will fail, of course, if gcloud isn't installed locally. 
     provisioner "local-exec" "kube-credentials" {
         command = "gcloud container clusters get-credentials --zone ${var.zone} ${var.cluster_name}"
     }
+    
+    # This will give system admin privelages to the provided user.
+    # This fails if we don't have kubectl installed locally.
+    provisioner "local-exec" "admin_clusterrolebinding" {
+        command = "kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=${var.cluster_admin_user}"
+    }
+
 }
