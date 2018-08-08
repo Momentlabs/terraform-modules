@@ -32,7 +32,7 @@ resource "kubernetes_service_account" "tiller_sa" {
 
     # .. finally let's secure the tiller again, I'm not completely sure what's why this is so important
     # but it does come highly recommended.
-    provider "local-exec" "secure tiller" {
+    provisioner "local-exec" "secure_tiller" {
         command = "kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{\"op\": \"add\", \"path\": \"/spec/template/spec/containers/0/command\", \"value\": [\"/tiller\", \"--listen=localhost:44134\"]}]'"
     }
 }
