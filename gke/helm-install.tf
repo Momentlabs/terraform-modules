@@ -29,7 +29,6 @@ resource "kubernetes_service_account" "tiller_sa" {
         command = "kubectl -n kube-system patch deployment tiller-deploy -p '{\"spec\": {\"template\": {\"spec\": {\"automountServiceAccountToken\": true}}}}'"
     }
 
-
     # .. finally let's secure the tiller again, I'm not completely sure what's why this is so important
     # but it does come highly recommended.
     provisioner "local-exec" "secure_tiller" {

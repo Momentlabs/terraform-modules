@@ -6,26 +6,38 @@ variable "cluster_description" {
 }
 
 variable "cluster_name" {
+    description = "short description describing cluster"
     default = "momentlabs-it"
 }
 
 variable "cluster_project" {
+    description = "name for cluster (e.g. athenaeum-notebooks-staging-1)"
     default = "momentlabs-it"
 }
 variable "cluster_zone" {
+    description = "google cloude zone where cluster will run (e.g. us-west1-a)"
     default = "us-west1-a"
 }
 
 variable "cluster_machine_type" {
+    description = "machine type for the default node pool (e.g. f1-micro or n1-standard or n1-standard-4)"
     default = "f1-micro"
 }
 variable "cluster_initial_node_count" {
+    description = "Number of initial nodes in the node pool"
     default = 3
 }
 
 variable "cluster_admin_user" {
+    description = "google cloud user name to use for creating the cluster."
     default = "david@momentlabs.io"
 }
+
+variable "google_creds_file" {
+    description = "Location of file with gcloud credentials (e.g account.json)"
+    default = "account.json"
+}
+
 variable "enable_helm" {
     description = "Install helm in to the cluster if enabled."
     default = true
@@ -36,7 +48,7 @@ variable "enable_helm" {
 # Resources
 #
 provider "google" {
-    credentials = "${file("account.json")}"
+    credentials = "${file("${var.google_creds_file}")}"
     project = "${var.cluster_project}"
     zone = "${var.cluster_zone}"
 }
@@ -97,6 +109,6 @@ output "initial_node_count" {
     value = "${data.google_container_cluster.new_cluster.initial_node_count}"
 }
 
-output "endpoint" {
+output "cluster_endpoint" {
     value = "${data.google_container_cluster.new_cluster.endpoint}"
 }
