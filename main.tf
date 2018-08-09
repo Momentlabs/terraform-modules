@@ -2,18 +2,20 @@
 # Variables
 #
 variable "cluster_description" {
+    description = "Short text string describing use of cluster (e.g. staging notebooks cluster.)"
     default = "General purpose container execution for IT experiments and services"
 }
 
 variable "cluster_name" {
-    description = "short description describing cluster"
+    description = "Descriptive name for cluster (e.g athenaeum-notebooks-production-1)"
     default = "momentlabs-it"
 }
 
 variable "cluster_project" {
-    description = "name for cluster (e.g. athenaeum-notebooks-staging-1)"
+    description = "Google cloud project name where cluster will run. (eg. momentlabs-jupyter)"
     default = "momentlabs-it"
 }
+
 variable "cluster_zone" {
     description = "google cloude zone where cluster will run (e.g. us-west1-a)"
     default = "us-west1-a"
@@ -23,6 +25,7 @@ variable "cluster_machine_type" {
     description = "machine type for the default node pool (e.g. f1-micro or n1-standard or n1-standard-4)"
     default = "f1-micro"
 }
+
 variable "cluster_initial_node_count" {
     description = "Number of initial nodes in the node pool"
     default = 3
@@ -39,8 +42,8 @@ variable "google_creds_file" {
 }
 
 variable "enable_helm" {
-    description = "Install helm in to the cluster if enabled."
-    default = true
+    description = "Install helm in to the cluster if enabled. (takes on of 'true' or 'fase')"
+    default = false
 }
 
 
