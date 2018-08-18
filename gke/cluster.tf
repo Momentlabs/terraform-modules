@@ -9,6 +9,7 @@ resource "google_container_cluster" "cluster" {
         labels {
             cluster = "${var.cluster_name}"
         }
+        oauth_scopes = "${node.permissions}"
     }
 
     # Let's set up the local kubectrl credentials for this once it's up.
