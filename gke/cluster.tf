@@ -9,6 +9,12 @@ resource "google_container_cluster" "cluster" {
         labels {
             cluster = "${var.cluster_name}"
         }
+        oauth_scopes = [
+            "https://www.googleapis.com/auth/compute"
+            "https://www.googleapis.com/auth/devstorage.read_only",
+            "https://www.googleapis.com/auth/logging.write",
+            "https://www.googleapis.com/auth/monitoring",
+        ]
     }
 
     # Let's set up the local kubectrl credentials for this once it's up.
